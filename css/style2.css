@@ -1,0 +1,98 @@
+/* Base Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #0e0e0e;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #ff0033; /* Red color for Cyber Eskişehir title */
+    margin-bottom: 20px;
+}
+
+.content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content-item {
+    background-color: #1a1a1a;
+    border: 2px solid #ff0033;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(255, 0, 51, 0.5);
+    transition: transform 0.3s;
+    width: 300px;
+    text-align: left;
+    display: flex; /* Aligns image and text horizontally */
+    align-items: center; /* Vertically centers the items */
+    gap: 15px; /* Adds space between image and text */
+}
+
+.content-item:hover {
+    transform: scale(1.05);
+}
+
+h2 {
+    margin: 0 0 10px;
+    color: #ff0033;
+}
+
+p {
+    margin: 0;
+    color: #cccccc;
+}
+
+a {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+/* New Styles for Social Icons */
+.content-item a {
+    display: flex;
+    align-items: center;
+    font-size: 22px; /* Adjust the text size */
+    text-decoration: none;
+    color: inherit;
+}
+
+.content-item a i {
+    font-size: 80px !important; /* Increase the icon size to 80px */
+    margin-right: 20px; /* Space between icon and text */
+}
+
+/* Adjusting spacing between items */
+.content-item {
+    margin-bottom: 15px;
+}
+
+/* Styling for any images, like logos */
+img {
+    width: 200px; /* Increase the width to make the image larger */
+    height: auto; /* Keep aspect ratio of the image */
+}
+
+/* Optional: For a more specific image (logo) class */
+.logo {
+    width: 250px; /* Logo width */
+    height: auto;
+}
+
+/* Additional Styles for Back Button */
+.content-item-1 a {
+    color: #ff0033;
+    font-size: 20px;
+    text-decoration: none;
+}
