@@ -1,59 +1,477 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Eskişehir</title>
-    <link rel="stylesheet" href="css/cyberesk.css">
-    <meta name="keywords" content="web security, signal intelligence, SIGINT, cybersecurity, penetration testing, ethical hacking, network security, OWASP, SQL injection, XSS, CSRF, SSRF, RCE, command injection, LFI, RFI, buffer overflow, zero-day exploit, malware analysis, ransomware, phishing, social engineering, MITM attack, HTTPS, TLS encryption, SSL stripping, CORS vulnerability, DNS spoofing, ARP poisoning, brute force attack, password cracking, keylogger, reverse engineering, OSINT, darknet, VPN security, anonymity, proxy servers, firewall, intrusion detection system, IDS, IPS, SIEM, honeypot, cyber threat intelligence, steganography, cryptography, hash functions, digital forensics, blockchain security, API security, cloud security, IAM, multi-factor authentication, session hijacking, clickjacking, RFID security, NFC security, Bluetooth security, Wi-Fi hacking, WPA3, packet sniffing, traffic analysis, deep packet inspection, radio frequency hacking, SDR security, HackRF, GNU Radio, signal decryption, GSM security, LTE security, 5G security, spectrum analysis, wireless penetration testing, satellite signal interception, SDR jamming, RF fingerprinting, drone signal hacking, GPS spoofing, ADS-B security, maritime signal interception, ELF signals, EMSEC, TEMPEST attacks, electronic warfare, RF propagation, SDR decoding, covert channel attacks, waveform analysis, software-defined radio, spectrum monitoring, frequency hopping security, RFID cloning, IoT security, AI security, AI-based intrusion detection, adversarial machine learning, secure coding, cyber warfare, cyber espionage, digital identity protection, cyber risk assessment, web scraping security, bot mitigation, DDoS protection, threat hunting, cyber resilience">
-    <link rel="shortcut icon" href="image/channels4_profile.jpg" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Eskişehir</title>
+<meta name="description" content="Cyber Eskişehir — siber güvenlik topluluğu, onur listesi, araştırmacı profilleri ve mini phishing avı oyunu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e13;
+    --surface: #121821;
+    --surface-2: #182130;
+    --border: #223042;
+    --text: #e7edf3;
+    --muted: #8ea0b3;
+    --cyan: #4fd1c5;
+    --cyan-dim: #2c7a72;
+    --amber: #f0b429;
+    --red: #ef5b5b;
+    --green: #57c785;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --radius: 10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(79,209,197,0.09), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(240,180,41,0.06), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+  }
+  ::selection{background:var(--cyan-dim); color:#fff;}
+  a{color:var(--cyan); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--cyan); outline-offset:3px;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,14,19,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:920px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .brand{font-family:var(--mono); font-weight:700; font-size:15px; color:var(--text); display:flex; align-items:center; gap:8px;}
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); display:inline-block;}
+  nav.links{display:flex; gap:20px; flex-wrap:wrap;}
+  nav.links a{font-family:var(--mono); font-size:13px; color:var(--muted);}
+  nav.links a:hover{color:var(--cyan); text-decoration:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:72px 0 48px; border-bottom:1px solid var(--border);}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--cyan);
+    display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;
+    background:rgba(79,209,197,0.08); border:1px solid rgba(79,209,197,0.25);
+    padding:5px 12px; border-radius:100px;
+  }
+  h1{font-family:var(--mono); font-size:clamp(32px,5vw,48px); margin:0 0 14px; letter-spacing:-0.02em; font-weight:800;}
+  .hero p.lead{color:var(--muted); font-size:17px; max-width:60ch; margin:0 0 26px;}
+  .terminal{
+    font-family:var(--mono); font-size:14px; background:var(--surface);
+    border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px;
+    color:var(--green); max-width:520px; overflow:hidden;
+  }
+  .terminal .line{color:var(--muted);}
+  .terminal .cmd{color:var(--text);}
+  .cursor{display:inline-block; width:8px; height:16px; background:var(--cyan); vertical-align:middle; animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:56px 0; border-bottom:1px solid var(--border);}
+  section:last-of-type{border-bottom:none;}
+  .section-head{margin-bottom:28px;}
+  .section-head .tag{font-family:var(--mono); font-size:12px; color:var(--amber); text-transform:uppercase; letter-spacing:0.08em;}
+  .section-head h2{font-family:var(--mono); font-size:26px; margin:6px 0 8px; font-weight:700;}
+  .section-head p{color:var(--muted); margin:0; max-width:60ch;}
+
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px 22px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:13px; font-weight:500;
+    padding:9px 16px; border-radius:8px; border:1px solid var(--border);
+    background:var(--surface-2); color:var(--text); cursor:pointer;
+  }
+  .btn:hover{border-color:var(--cyan); color:var(--cyan); text-decoration:none;}
+  .btn.primary{background:var(--cyan); color:#04201c; border-color:var(--cyan); font-weight:700;}
+  .btn.primary:hover{color:#04201c; opacity:0.9;}
+
+  /* GitHub / blog list */
+  .list-links{display:flex; flex-direction:column; gap:10px; margin-top:6px;}
+  .list-links a{font-family:var(--mono); font-size:14px; color:var(--text); border:1px solid var(--border); background:var(--surface); border-radius:8px; padding:12px 14px; display:block;}
+  .list-links a:hover{border-color:var(--cyan); text-decoration:none; color:var(--cyan);}
+  .list-links a::before{content:"→ "; color:var(--muted);}
+
+  /* Hall of fame */
+  .hof-grid{display:grid; gap:14px;}
+  .hof-item{
+    display:flex; gap:14px; align-items:flex-start;
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px;
+  }
+  .hof-item .badge{
+    font-family:var(--mono); font-size:11px; color:var(--amber); border:1px solid rgba(240,180,41,0.35);
+    background:rgba(240,180,41,0.08); padding:3px 9px; border-radius:100px; white-space:nowrap; margin-top:2px;
+  }
+  .hof-item h3{margin:0 0 4px; font-size:16px; font-family:var(--sans); font-weight:600;}
+  .hof-item p{margin:0 0 8px; color:var(--muted); font-size:14px;}
+  .hof-item .id-tag{font-family:var(--mono); font-size:12px; color:var(--cyan);}
+
+  /* Profiles */
+  .profile-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:640px){.profile-grid{grid-template-columns:1fr;}}
+  .profile-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px; display:flex; flex-direction:column; gap:10px;
+  }
+  .profile-card .plat{font-family:var(--mono); font-size:13px; color:var(--muted); display:flex; align-items:center; gap:8px;}
+  .profile-card .plat .sw{width:22px; height:22px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:800;}
+  .sw.h1{background:rgba(240,180,41,0.15); color:var(--amber);}
+  .sw.ig{background:rgba(79,209,197,0.15); color:var(--cyan);}
+  .profile-card .handle{font-family:var(--mono); font-size:18px; font-weight:700;}
+  .profile-card p{margin:0; color:var(--muted); font-size:13.5px;}
+
+  /* Game */
+  .game-wrap{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; text-align:center;}
+  .game-hud{display:flex; justify-content:space-between; align-items:center; font-family:var(--mono); font-size:13px; color:var(--muted); margin-bottom:16px; flex-wrap:wrap; gap:8px;}
+  .game-hud .score{color:var(--text); font-weight:700;}
+  .email-card{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:8px;
+    padding:20px; text-align:left; margin:0 auto 18px; max-width:560px; min-height:150px;
+  }
+  .email-card .field{font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:3px;}
+  .email-card .field b{color:var(--text); font-weight:500;}
+  .email-card .body{margin-top:10px; font-size:14.5px; color:var(--text);}
+  .game-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .game-actions .btn{min-width:150px; justify-content:center; padding:12px 18px; font-size:14px;}
+  .btn.danger{border-color:rgba(239,91,91,0.4); color:var(--red);}
+  .btn.danger:hover{background:rgba(239,91,91,0.1); color:var(--red);}
+  .btn.safe{border-color:rgba(87,199,133,0.4); color:var(--green);}
+  .btn.safe:hover{background:rgba(87,199,133,0.1); color:var(--green);}
+  .feedback{font-family:var(--mono); font-size:13px; min-height:20px; margin-top:14px;}
+  .feedback.correct{color:var(--green);}
+  .feedback.wrong{color:var(--red);}
+  .game-result{display:none;}
+  .game-result h3{font-family:var(--mono); font-size:22px; margin:0 0 8px;}
+  .game-result p{color:var(--muted); margin:0 0 18px;}
+  .disclaimer{font-size:12.5px; color:var(--muted); margin-top:16px;}
+
+  .arena{
+    position:relative; width:100%; height:340px; margin:0 auto;
+    background:
+      linear-gradient(rgba(79,209,197,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,209,197,0.05) 1px, transparent 1px);
+    background-size:24px 24px;
+    background-color:var(--surface-2);
+    border:1px solid var(--border); border-radius:8px;
+    overflow:hidden; display:none;
+  }
+  .icon-target{
+    position:absolute; font-size:30px; line-height:1;
+    background:none; border:none; padding:6px; cursor:pointer;
+    animation:pop-in 0.15s ease-out;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  }
+  .icon-target:hover{transform:scale(1.12);}
+  @keyframes pop-in{from{transform:scale(0.4); opacity:0;} to{transform:scale(1); opacity:1;}}
+  .popup-score{
+    position:absolute; font-family:var(--mono); font-weight:700; font-size:15px;
+    pointer-events:none; animation:float-up 0.7s ease-out forwards;
+  }
+  .popup-score.pos{color:var(--green);}
+  .popup-score.neg{color:var(--red);}
+  @keyframes float-up{
+    from{transform:translateY(0); opacity:1;}
+    to{transform:translateY(-36px); opacity:0;}
+  }
+
+  /* Social */
+  .social-block{margin-bottom:22px;}
+  .social-block h3{font-family:var(--mono); font-size:14px; color:var(--muted); font-weight:500; margin:0 0 12px; text-transform:uppercase; letter-spacing:0.06em;}
+  .social-links{display:flex; gap:10px; flex-wrap:wrap;}
+
+  footer{padding:32px 0 60px; text-align:center;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--muted);}
+</style>
 </head>
 <body>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#github">GitHub</a>
-        <a href="#blog">Blog</a>
-        <a href="#social">Social Media</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span>cyber_eskisehir</div>
+    <nav class="links">
+      <a href="#home">Ana Sayfa</a>
+      <a href="#github">GitHub</a>
+      <a href="#blog">Blog</a>
+      <a href="#hof">Onur Listesi</a>
+      <a href="#profiles">Profiller</a>
+      <a href="#game">Oyun</a>
+      <a href="#social">Sosyal Medya</a>
     </nav>
-    <div class="container">
-        <section id="home" class="section">
-            <h1>Welcome to the  Cyber Eskişehir Project</h1>
-            <p>Join us in exploring the world of cybersecurity. Learn, share, and grow with fellow enthusiasts.</p>
-        </section>
+  </div>
+</header>
 
-        <section id="github" class="section">
-            <h2>Our GitHub</h2>
-            <p>Check out our open-source projects and contribute to the community!</p>
-            <a href="https://github.com/" target="_blank">Visit GitHub</a>
-        </section>
+<main class="wrap">
 
-        <section id="blog" class="section">
-            <h2>Articles</h2>
-            <p>See Our Articles :</p>
-            <ul class="links-list">
-                <li><a href="https://umuttkyrdgn.medium.com/lists" target="_blank">Medium Profile And All Articles</a></li>
-                <li><a href="https://umuttkyrdgn.medium.com/list/php-security-bb2a2dd08f83" target="_blank">PHP Software Secuirty And Source Code Analyze</a></li>
-                <li><a href="https://umuttkyrdgn.medium.com/list/javascript-security-dd5a81c710e0" target="_blank">Javascript Software Secuirty And Source Code Analyze</a></li>
-            </ul>
-        </section>
-
-        <section id="social" class="section">
-            <h2>Follow Us</h2>
-            <div class="social-icons">
-                <a href="https://x.com/CyberEskisehir" target="_blank">Twitter</a>
-                <a href="https://www.instagram.com/cybereskisehir/" target="_blank">Instagram</a>
-                <a href="https://www.youtube.com/@cybereskisehir" target="_blank">Youtube</a>
-                <a href="https://discord.gg/N7PEQJStcp" target="_blank">Discord</a>
-            </div>
-        </section>
-        <section id="social" class="section">
-            <h2>Follow Us ~ Founder </h2>
-            <div class="social-icons">
-                <a href="https://x.com/Umut0x01/" target="_blank">Twitter</a>
-                <a href="https://www.instagram.com/umutkyrdgn/" target="_blank">Instagram</a>
-                <a href="https://www.linkedin.com/in/umut-kayra-dogan-156495315/" target="_blank">LinkedIn</a>
-            </div>
-        </section>
+  <section class="hero" id="home">
+    <h1>Cyber Eskişehir</h1>
+    <div class="terminal">
+      <div class="line">$ <span class="cmd">...</span></div>
     </div>
+  </section>
+
+  <section id="github">
+    <div class="section-head">
+      <span class="tag">Kod</span>
+      <h2>GitHub</h2>
+      <p>Açık kaynak projelerimize göz atın ve topluluğa katkıda bulunun.</p>
+    </div>
+    <a class="btn primary" href="https://github.com/" target="_blank" rel="noopener">GitHub'ı ziyaret et</a>
+  </section>
+
+  <section id="blog">
+    <div class="section-head">
+      <span class="tag">Yazılar</span>
+      <h2>Blog</h2>
+      <p>Tüm makalelere ve yazı dizilerine buradan ulaşabilirsiniz.</p>
+    </div>
+    <div class="list-links">
+      <a href="https://umuttkyrdgn.medium.com/lists" target="_blank" rel="noopener">Medium Profili ve Tüm Yazılar</a>
+    </div>
+  </section>
+
+  <section id="hof">
+    <div class="section-head">
+      <span class="tag">Takdir</span>
+      <h2>Onur Listesi</h2>
+      <p>Sorumlu açıklama (responsible disclosure) süreciyle bildirilen ve kurumlar tarafından kayıt altına alınan katkılar.</p>
+    </div>
+    <div class="hof-grid">
+      <div class="hof-item">
+        <span class="badge">2026</span>
+        <div>
+          <h3>Arçelik — Vulnerability Disclosure Hall of Fame</h3>
+          <a class="btn" href="https://www.arcelikglobal.com/en/vulnerability-disclosure-hall-of-fame/2026-vulnerability-disclosure-hall-of-fame/" target="_blank" rel="noopener">Listeyi görüntüle ↗</a>
+        </div>
+      </div>
+       <div class="hof-grid">
+      <div class="hof-item">
+        <span class="badge">2026</span>
+        <div>
+          <h3>Achmea — Vulnerability Disclosure Hall of Fame</h3>
+          <a class="btn" href="https://www.achmea.nl/en/responsible-disclosure/hall-of-fame" target="_blank" rel="noopener">Listeyi görüntüle ↗</a>
+        </div>
+      </div>
+      <div class="hof-item">
+        <span class="badge">CVE</span>
+        <div>
+          <h3>CVE-2026-13138</h3>
+          <a class="btn" href="https://www.cve.org/CVERecord?id=CVE-2026-13138" target="_blank" rel="noopener">CVE kaydını görüntüle ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="profiles">
+    <div class="section-head">
+      <span class="tag">Araştırmacı</span>
+      <h2>Profiller</h2>
+      <p>Bug bounty ve sorumlu açıklama platformlarındaki profiller.</p>
+    </div>
+    <div class="profile-grid">
+      <a class="profile-card" href="https://hackerone.com/umuttkyrdgn?type=user" target="_blank" rel="noopener">
+        <div class="plat"><span class="sw h1">H1</span> HackerOne</div>
+        <div class="handle">umuttkyrdgn</div>
+        <p>Profili görüntülemek için tıklayın ↗</p>
+      </a>
+      <a class="profile-card" href="https://app.intigriti.com/researcher/profile/umutt" target="_blank" rel="noopener">
+        <div class="plat"><span class="sw ig">IG</span> Intigriti</div>
+        <div class="handle">umutt</div>
+        <p>Profili görüntülemek için tıklayın ↗</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="game">
+    <div class="section-head">
+      <span class="tag">Pratik</span>
+      <p>Ekranda beliren tehditlere (🐞 🦠 🎣 💀) tıklayarak puan topla. Güvenli ikonlara (🔒 ✅ 🛡️ 📄) tıklarsan puan kaybedersin.</p>
+    </div>
+
+    <div class="game-wrap">
+      <div class="game-hud">
+        <span>Süre: <span id="timeLeft">45</span>s</span>
+        <span class="score">Skor: <span id="score">0</span></span>
+        <span>En Yüksek: <span id="bestScore">0</span></span>
+      </div>
+
+      <div id="gameStart">
+        <p class="disclaimer" style="margin-top:0;">Tehditlere tıkla, güvenli ikonlardan uzak dur. Hazır mısın?</p>
+        <button class="btn primary" onclick="startGame()">Oyunu Başlat</button>
+      </div>
+
+      <div id="gameArena" class="arena"></div>
+
+      <div class="game-result" id="gameResult">
+        <h3 id="resultTitle"></h3>
+        <p id="resultText"></p>
+        <button class="btn primary" onclick="startGame()">Tekrar Oyna</button>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="social">
+    <div class="section-head">
+      <span class="tag">Bağlantılar</span>
+      <h2>Sosyal Medya</h2>
+    </div>
+
+    <div class="social-block">
+      <h3>Topluluğu Takip Et</h3>
+      <div class="social-links">
+        <a class="btn" href="https://x.com/CyberEskisehir" target="_blank" rel="noopener">Twitter / X</a>
+        <a class="btn" href="https://www.instagram.com/cybereskisehir/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://www.youtube.com/@cybereskisehir" target="_blank" rel="noopener">YouTube</a>
+        <a class="btn" href="https://discord.gg/N7PEQJStcp" target="_blank" rel="noopener">Discord</a>
+      </div>
+    </div>
+
+    <div class="social-block">
+      <h3>Kurucuyu Takip Et</h3>
+      <div class="social-links">
+        <a class="btn" href="https://x.com/Umut0x01/" target="_blank" rel="noopener">Twitter / X</a>
+        <a class="btn" href="https://www.instagram.com/umutkyrdgn/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://www.linkedin.com/in/umut-kayra-dogan-156495315/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 
+</footer>
+
+<script>
+  // ---- Tehdit Avcısı: puan toplanan mini oyun ----
+  const THREATS = ['🐞', '🦠', '🎣', '💀'];
+  const SAFE = ['🔒', '✅', '🛡️', '📄'];
+  const GAME_DURATION = 45;
+  const SPAWN_MS = 750;
+  const LIFETIME_MS = 1100;
+
+  let score = 0;
+  let timeLeft = GAME_DURATION;
+  let spawnTimer = null;
+  let countdownTimer = null;
+  let running = false;
+
+  const arena = document.getElementById('gameArena');
+  const scoreEl = document.getElementById('score');
+  const timeEl = document.getElementById('timeLeft');
+  const bestEl = document.getElementById('bestScore');
+
+  function getBest(){
+    return parseInt(localStorage.getItem('cyberEskisehirBestScore') || '0', 10);
+  }
+  bestEl.textContent = getBest();
+
+  function spawnIcon(){
+    if(!running) return;
+    const isThreat = Math.random() < 0.65;
+    const symbol = isThreat
+      ? THREATS[Math.floor(Math.random() * THREATS.length)]
+      : SAFE[Math.floor(Math.random() * SAFE.length)];
+
+    const btn = document.createElement('button');
+    btn.className = 'icon-target';
+    btn.textContent = symbol;
+    btn.setAttribute('aria-label', isThreat ? 'tehdit' : 'güvenli öğe');
+
+    const arenaRect = arena.getBoundingClientRect();
+    const maxX = Math.max(arenaRect.width - 44, 10);
+    const maxY = Math.max(arenaRect.height - 44, 10);
+    btn.style.left = Math.floor(Math.random() * maxX) + 'px';
+    btn.style.top = Math.floor(Math.random() * maxY) + 'px';
+
+    let expired = false;
+    const removeTimer = setTimeout(() => {
+      expired = true;
+      btn.remove();
+    }, LIFETIME_MS);
+
+    btn.addEventListener('click', () => {
+      if(expired) return;
+      clearTimeout(removeTimer);
+      const delta = isThreat ? 10 : -5;
+      score = Math.max(0, score + delta);
+      scoreEl.textContent = score;
+      showPopup(btn.style.left, btn.style.top, delta);
+      btn.remove();
+    });
+
+    arena.appendChild(btn);
+  }
+
+  function showPopup(left, top, delta){
+    const popup = document.createElement('div');
+    popup.className = 'popup-score ' + (delta > 0 ? 'pos' : 'neg');
+    popup.textContent = (delta > 0 ? '+' : '') + delta;
+    popup.style.left = left;
+    popup.style.top = top;
+    arena.appendChild(popup);
+    setTimeout(() => popup.remove(), 700);
+  }
+
+  function startGame(){
+    score = 0;
+    timeLeft = GAME_DURATION;
+    running = true;
+    scoreEl.textContent = 0;
+    timeEl.textContent = timeLeft;
+
+    document.getElementById('gameStart').style.display = 'none';
+    document.getElementById('gameResult').style.display = 'none';
+    arena.innerHTML = '';
+    arena.style.display = 'block';
+
+    spawnTimer = setInterval(spawnIcon, SPAWN_MS);
+    countdownTimer = setInterval(() => {
+      timeLeft--;
+      timeEl.textContent = timeLeft;
+      if(timeLeft <= 0) endGame();
+    }, 1000);
+  }
+
+  function endGame(){
+    running = false;
+    clearInterval(spawnTimer);
+    clearInterval(countdownTimer);
+    arena.innerHTML = '';
+    arena.style.display = 'none';
+    
+    const best = getBest();
+    let newBest = false;
+    if(score > best){
+      localStorage.setItem('cyberEskisehirBestScore', String(score));
+      bestEl.textContent = score;
+      newBest = true;
+    }
+
+    document.getElementById('resultTitle').textContent = newBest
+      ? 'Yeni Rekor: ' + score + ' puan 🎉'
+      : 'Oyun Bitti — ' + score + ' puan';
+    document.getElementById('resultText').textContent = newBest
+      ? 'Tebrikler, en yüksek skorunu geçtin!'
+      : 'En yüksek skor: ' + best + ' puan. Tekrar dene ve geç!';
+    document.getElementById('gameResult').style.display = 'block';
+  }
+</script>
+
 </body>
 </html>
